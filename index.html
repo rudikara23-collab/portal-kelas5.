@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Belajar Kelas 5 - SD Negeri 13 Pedungan</title>
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --text: #2D3436;
+            --bg: #F7F9FC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 0 #3b9b94;
+        }
+
+        nav button:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #3b9b94;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            display: none; /* Sembunyikan semua section di awal */
+        }
+
+        .active-section {
+            display: block; /* Tampilkan section yang aktif */
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 3px dashed var(--accent);
+            padding-bottom: 10px;
+        }
+
+        /* Form Upload Styles */
+        .upload-box {
+            border: 3px dashed var(--secondary);
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            background-color: #f0fbfb;
+            margin-bottom: 20px;
+        }
+
+        .upload-box input[type="file"] {
+            display: none;
+        }
+
+        .upload-btn {
+            background-color: var(--accent);
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+            border: 2px solid #e5cf62;
+        }
+
+        .preview-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Quiz Styles */
+        .question-card {
+            background-color: #fef9e7;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .options label {
+            display: block;
+            padding: 10px;
+            background: white;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .options label:hover {
+            background: #f0f0f0;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #quiz-result {
+            text-align: center;
+            padding: 30px;
+            background-color: #e8f8f5;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 0 auto 20px auto;
+            border: 5px solid var(--primary);
+        }
+
+        .review-item {
+            text-align: left;
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 4px solid;
+        }
+        .review-benar { border-color: #2ecc71; }
+        .review-salah { border-color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌟 Portal Pintar Kelas 5 🌟</h1>
+        <p>Mari belajar dan berkreasi bersama!</p>
+    </header>
+
+    <nav>
+        <button onclick="showSection('uploadKegiatan')">📸 Upload Foto Kegiatan</button>
+        <button onclick="showSection('kuisIpas')">📝 Kuis IPAS Ekosistem</button>
+        <button onclick="showSection('seniRupa')">🎨 Tugas Seni Rupa</button>
+    </nav>
+
+    <!-- SECTION 1: UPLOAD KEGIATAN -->
+    <div id="uploadKegiatan" class="container active-section">
+        <h2>📸 Upload Foto Kegiatan Siswa</h2>
+        
+        <div class="upload-box">
+            <h3>Foto Kegiatan Kebersihan 🧹</h3>
+            <p>Pilih foto saat kamu sedang piket atau membersihkan lingkungan.</p>
+            <label class="upload-btn">
+                Pilih Foto
+                <input type="file" accept="image/*" onchange="previewImage(event, 'previewKebersihan')">
+            </label>
+            <div id="previewKebersihan"></div>
+        </div>
+
+        <div class="upload-box">
+            <h3>Foto Saat Belajar 📚</h3>
+            <p>Pilih foto saat kamu sedang serius mengerjakan tugas atau belajar.</p>
+            <label class="upload-btn">
+                Pilih Foto
+                <input type="file" accept="image/*" onchange="previewImage(event, 'previewBelajar')">
+            </label>
+            <div id="previewBelajar"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: KUIS IPAS -->
+    <div id="kuisIpas" class="container">
+        <h2>📝 Kuis IPAS: Ekosistem</h2>
+        <p>Kerjakan 20 soal di bawah ini dengan teliti. Selamat mengerjakan!</p>
+        
+        <div id="quiz-container">
+            <!-- Soal akan dimunculkan oleh JavaScript di sini -->
+        </div>
+        <button class="submit-btn" onclick="submitQuiz()">Kumpulkan & Lihat Nilai</button>
+
+        <div id="quiz-result">
+            <h3>Hasil Kuis Kamu</h3>
+            <div class="score-circle" id="score-display">100</div>
+            <p id="score-message"></p>
+            <h4>Data Evaluasi Jawaban:</h4>
+            <div id="review-container"></div>
+            <button class="upload-btn" onclick="resetQuiz()" style="margin-top: 20px;">Kerjakan Ulang</button>
+        </div>
+    </div>
+
+    <!-- SECTION 3: SENI RUPA -->
+    <div id="seniRupa" class="container">
+        <h2>🎨 Pengumpulan Tugas Seni Rupa</h2>
+        
+        <div class="upload-box" style="border-color: #FF6B6B; background-color: #fff5f5;">
+            <h3>Upload Karyamu Di Sini! 🖍️</h3>
+            <p>Foto hasil gambarmu yang paling bagus dan warnai dengan indah, lalu upload ke sini.</p>
+            <label class="upload-btn" style="background-color: var(--primary); color: white; border:none;">
+                Pilih Foto Gambar
+                <input type="file" accept="image/*" onchange="previewImage(event, 'previewSeni')">
+            </label>
+            <div id="previewSeni"></div>
+        </div>
+    </div>
+
+    <script>
+        // Data Soal Kuis
+        const questions = [
+            { q: "Segala sesuatu yang hidup di lingkungan (seperti hewan dan tumbuhan) disebut komponen...", options: ["A. Abiotik", "B. Biotik", "C. Ekosistem", "D. Populasi"], answer: 1 },
+            { q: "Berikut ini yang merupakan contoh komponen abiotik (benda tak hidup) adalah...", options: ["A. Tumbuhan", "B. Cacing", "C. Cahaya Matahari", "D. Jamur"], answer: 2 },
+            { q: "Makhluk hidup yang dapat membuat makanannya sendiri (seperti tumbuhan) disebut...", options: ["A. Produsen", "B. Konsumen", "C. Dekomposer", "D. Predator"], answer: 0 },
+            { q: "Dalam ekosistem sawah, yang berperan sebagai produsen adalah...", options: ["A. Tikus", "B. Ular", "C. Padi", "D. Burung Elang"], answer: 2 },
+            { q: "Makhluk hidup yang tidak bisa membuat makanan sendiri dan harus memakan makhluk hidup lain disebut...", options: ["A. Produsen", "B. Konsumen", "C. Dekomposer", "D. Abiotik"], answer: 1 },
+            { q: "Organisme yang bertugas menguraikan sisa-sisa makhluk hidup yang sudah mati disebut...", options: ["A. Predator", "B. Herbivora", "C. Karnivora", "D. Dekomposer"], answer: 3 },
+            { q: "Contoh dari dekomposer atau pengurai adalah...", options: ["A. Jamur dan Bakteri", "B. Rumput dan Pohon", "C. Harimau dan Singa", "D. Sapi dan Kambing"], answer: 0 },
+            { q: "Hewan yang sumber makanannya hanya berasal dari tumbuhan disebut...", options: ["A. Karnivora", "B. Omnivora", "C. Herbivora", "D. Insektivora"], answer: 2 },
+            { q: "Sapi, kuda, kerbau, dan kelinci adalah contoh hewan...", options: ["A. Karnivora", "B. Herbivora", "C. Omnivora", "D. Dekomposer"], answer: 1 },
+            { q: "Hewan pemakan daging seperti harimau, singa, dan buaya termasuk dalam kelompok...", options: ["A. Herbivora", "B. Karnivora", "C. Omnivora", "D. Produsen"], answer: 1 },
+            { q: "Hewan pemakan segala (tumbuhan dan daging), seperti ayam dan tikus, disebut...", options: ["A. Omnivora", "B. Karnivora", "C. Herbivora", "D. Dekomposer"], answer: 0 },
+            { q: "Hewan yang berburu, menangkap, dan memangsa hewan lain disebut...", options: ["A. Mangsa", "B. Predator", "C. Produsen", "D. Dekomposer"], answer: 1 },
+            { q: "Seekor burung elang adalah predator puncak. Maksud dari predator puncak adalah...", options: ["A. Pemakan rumput", "B. Hewan yang dimangsa semua hewan", "C. Hewan pemangsa yang tidak dimangsa hewan lain", "D. Pengurai bangkai"], answer: 2 },
+            { q: "Satu makhluk hidup tunggal (contoh: seekor ayam, sebatang pohon kelapa) disebut...", options: ["A. Individu", "B. Populasi", "C. Komunitas", "D. Ekosistem"], answer: 0 },
+            { q: "Kumpulan makhluk hidup yang sejenis (contoh: sekumpulan semut, sekelompok gajah) di suatu tempat disebut...", options: ["A. Individu", "B. Populasi", "C. Komunitas", "D. Bioma"], answer: 1 },
+            { q: "Kumpulan berbagai jenis populasi hewan dan tumbuhan (berbeda jenis) yang hidup bersama di suatu wilayah disebut...", options: ["A. Individu", "B. Populasi", "C. Komunitas", "D. Spesies"], answer: 2 },
+            { q: "Air, tanah, suhu, dan kelembapan sangat penting bagi makhluk hidup. Ini semua termasuk komponen...", options: ["A. Biotik", "B. Komunitas", "C. Populasi", "D. Abiotik"], answer: 3 },
+            { q: "Manusia memakan sayuran dan juga memakan daging ikan. Maka manusia termasuk...", options: ["A. Herbivora", "B. Karnivora", "C. Omnivora", "D. Pengurai"], answer: 2 },
+            { q: "Jika semua rumput di padang rumput mati karena kemarau, maka hewan yang paling pertama kesulitan makanan adalah...", options: ["A. Karnivora", "B. Herbivora", "C. Dekomposer", "D. Predator"], answer: 1 },
+            { q: "Di taman sekolah terdapat sekelompok kupu-kupu, sekelompok semut, dan berbagai tanaman bunga. Kumpulan ketiganya membentuk...", options: ["A. Individu", "B. Populasi tunggal", "C. Komunitas", "D. Komponen Abiotik"], answer: 2 }
+        ];
+
+        // Navigasi antar menu
+        function showSection(sectionId) {
+            document.querySelectorAll('.container').forEach(div => {
+                div.classList.remove('active-section');
+            });
+            document.getElementById(sectionId).classList.add('active-section');
+        }
+
+        // Preview Foto Upload
+        function previewImage(event, previewId) {
+            const container = document.getElementById(previewId);
+            container.innerHTML = ''; 
+            const file = event.target.files[0];
+            if (file) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.className = 'preview-img';
+                container.appendChild(img);
+                
+                const notif = document.createElement('p');
+                notif.innerText = "✅ Foto berhasil dipilih!";
+                notif.style.color = "green";
+                notif.style.fontWeight = "bold";
+                container.appendChild(notif);
+            }
+        }
+
+        // Render Kuis
+        const quizContainer = document.getElementById('quiz-container');
+        function renderQuiz() {
+            quizContainer.innerHTML = '';
+            questions.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.innerHTML = `
+                    <p><strong>Soal ${index + 1}:</strong> ${q.q}</p>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <label>
+                                <input type="radio" name="q${index}" value="${i}">
+                                ${opt}
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                quizContainer.appendChild(card);
+            });
+        }
+        renderQuiz();
+
+        // Hitung Kuis
+        function submitQuiz() {
+            let correctCount = 0;
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '';
+            
+            let allAnswered = true;
+
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (!selected) {
+                    allAnswered = false;
+                }
+            });
+
+            if(!allAnswered) {
+                alert("Ada soal yang belum dijawab! Silakan periksa kembali ya.");
+                return;
+            }
+
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const userAnswer = parseInt(selected.value);
+                const isCorrect = userAnswer === q.answer;
+                
+                if (isCorrect) correctCount++;
+
+                // Buat review
+                const reviewDiv = document.createElement('div');
+                reviewDiv.className = `review-item ${isCorrect ? 'review-benar' : 'review-salah'}`;
+                reviewDiv.innerHTML = `
+                    <strong>Soal ${index + 1}:</strong> ${isCorrect ? '✅ Benar' : '❌ Salah'}<br>
+                    <small>Jawaban yang tepat: ${q.options[q.answer]}</small>
+                `;
+                reviewContainer.appendChild(reviewDiv);
+            });
+
+            const score = (correctCount / questions.length) * 100;
+            document.getElementById('score-display').innerText = score;
+            
+            let message = "";
+            if (score === 100) message = "Luar biasa! Kamu memahami ekosistem dengan sangat sempurna! 🏆";
+            else if (score >= 80) message = "Hebat! Pemahamanmu sangat bagus! ⭐";
+            else if (score >= 60) message = "Cukup bagus, ayo belajar lebih giat lagi tentang ekosistem! 📚";
+            else message = "Jangan menyerah, mari pelajari ulang catatannya ya! 💪";
+            
+            document.getElementById('score-message').innerText = message;
+
+            // Tampilkan hasil, sembunyikan soal
+            quizContainer.style.display = 'none';
+            document.querySelector('.submit-btn').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+        }
+
+        // Reset Kuis
+        function resetQuiz() {
+            document.getElementById('quiz-result').style.display = 'none';
+            quizContainer.style.display = 'block';
+            document.querySelector('.submit-btn').style.display = 'block';
+            
+            // Bersihkan pilihan radio button
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => radio.checked = false);
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
