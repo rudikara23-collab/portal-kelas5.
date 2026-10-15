@@ -29,18 +29,32 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        h1 {
-            margin: 0;
-            font-size: 28px;
+        .student-bar {
+            background-color: #fff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .student-bar input {
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--secondary);
+            font-size: 16px;
+            width: 250px;
+            outline: none;
         }
 
         nav {
             display: flex;
             justify-content: center;
             gap: 15px;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 15px;
+            background-color: #eef2f7;
             flex-wrap: wrap;
         }
 
@@ -53,28 +67,25 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
             box-shadow: 0 4px 0 #3b9b94;
+            transition: transform 0.2s;
         }
 
         nav button:hover {
             transform: translateY(2px);
-            box-shadow: 0 2px 0 #3b9b94;
         }
 
         .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 25px;
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            display: none; /* Sembunyikan semua section di awal */
+            display: none;
         }
 
-        .active-section {
-            display: block; /* Tampilkan section yang aktif */
-        }
+        .active-section { display: block; }
 
         h2 {
             color: var(--primary);
@@ -82,44 +93,36 @@
             padding-bottom: 10px;
         }
 
-        /* Form Upload Styles */
         .upload-box {
             border: 3px dashed var(--secondary);
-            padding: 30px;
+            padding: 25px;
             text-align: center;
             border-radius: 15px;
             background-color: #f0fbfb;
             margin-bottom: 20px;
         }
 
-        .upload-box input[type="file"] {
-            display: none;
-        }
-
-        .upload-btn {
-            background-color: var(--accent);
-            color: #333;
-            padding: 10px 20px;
-            border-radius: 15px;
+        .action-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
             font-weight: bold;
             cursor: pointer;
-            display: inline-block;
+            border: none;
+            font-size: 16px;
             margin-top: 10px;
-            border: 2px solid #e5cf62;
+            box-shadow: 0 4px 0 #d9534f;
         }
 
-        .preview-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        .action-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #d9534f;
         }
 
-        /* Quiz Styles */
         .question-card {
             background-color: #fef9e7;
-            padding: 15px 20px;
+            padding: 15px;
             border-radius: 15px;
             margin-bottom: 15px;
             border-left: 5px solid var(--accent);
@@ -133,48 +136,36 @@
             border-radius: 8px;
             border: 1px solid #ddd;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .options label:hover {
-            background: #f0f0f0;
-        }
-
-        .submit-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
         }
 
         #quiz-result {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             background-color: #e8f8f5;
             border-radius: 15px;
-            margin-top: 20px;
             display: none;
         }
 
         .score-circle {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background-color: var(--secondary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 36px;
             font-weight: bold;
-            margin: 0 auto 20px auto;
-            border: 5px solid var(--primary);
+            margin: 10px auto;
+            border: 4px solid var(--primary);
+        }
+
+        .loading-spinner {
+            display: none;
+            color: var(--primary);
+            font-weight: bold;
+            margin-top: 10px;
         }
 
         .review-item {
@@ -193,8 +184,13 @@
 
     <header>
         <h1>🌟 Portal Pintar Kelas 5 🌟</h1>
-        <p>Mari belajar dan berkreasi bersama!</p>
+        <p>SD Negeri 13 Pedungan</p>
     </header>
+
+    <div class="student-bar">
+        <label for="studentName"><strong>Nama Siswa:</strong></label>
+        <input type="text" id="studentName" placeholder="Ketik nama lengkapmu..." required>
+    </div>
 
     <nav>
         <button onclick="showSection('uploadKegiatan')">📸 Upload Foto Kegiatan</button>
@@ -202,68 +198,64 @@
         <button onclick="showSection('seniRupa')">🎨 Tugas Seni Rupa</button>
     </nav>
 
-    <!-- SECTION 1: UPLOAD KEGIATAN -->
+    <!-- MENU 1: FOTO KEGIATAN -->
     <div id="uploadKegiatan" class="container active-section">
-        <h2>📸 Upload Foto Kegiatan Siswa</h2>
+        <h2>📸 Upload Foto Kegiatan</h2>
         
         <div class="upload-box">
             <h3>Foto Kegiatan Kebersihan 🧹</h3>
             <p>Pilih foto saat kamu sedang piket atau membersihkan lingkungan.</p>
-            <label class="upload-btn">
-                Pilih Foto
-                <input type="file" accept="image/*" onchange="previewImage(event, 'previewKebersihan')">
-            </label>
-            <div id="previewKebersihan"></div>
+            <input type="file" id="fileKebersihan" accept="image/*">
+            <br>
+            <button class="action-btn" onclick="uploadFoto('fileKebersihan', 'Kegiatan Kebersihan', 'statusKebersihan')">Kirim Foto Kebersihan</button>
+            <div id="statusKebersihan" class="loading-spinner">Mengirim foto ke Google Drive Bapak Guru... ⏳</div>
         </div>
 
         <div class="upload-box">
             <h3>Foto Saat Belajar 📚</h3>
-            <p>Pilih foto saat kamu sedang serius mengerjakan tugas atau belajar.</p>
-            <label class="upload-btn">
-                Pilih Foto
-                <input type="file" accept="image/*" onchange="previewImage(event, 'previewBelajar')">
-            </label>
-            <div id="previewBelajar"></div>
+            <p>Pilih foto saat kamu sedang belajar atau mengerjakan tugas.</p>
+            <input type="file" id="fileBelajar" accept="image/*">
+            <br>
+            <button class="action-btn" onclick="uploadFoto('fileBelajar', 'Kegiatan Belajar', 'statusBelajar')">Kirim Foto Belajar</button>
+            <div id="statusBelajar" class="loading-spinner">Mengirim foto ke Google Drive Bapak Guru... ⏳</div>
         </div>
     </div>
 
-    <!-- SECTION 2: KUIS IPAS -->
+    <!-- MENU 2: KUIS IPAS -->
     <div id="kuisIpas" class="container">
         <h2>📝 Kuis IPAS: Ekosistem</h2>
-        <p>Kerjakan 20 soal di bawah ini dengan teliti. Selamat mengerjakan!</p>
-        
-        <div id="quiz-container">
-            <!-- Soal akan dimunculkan oleh JavaScript di sini -->
-        </div>
-        <button class="submit-btn" onclick="submitQuiz()">Kumpulkan & Lihat Nilai</button>
+        <p>Jawab 20 soal pilihan ganda di bawah ini dengan teliti!</p>
+        <div id="quiz-container"></div>
+        <button class="action-btn" style="width:100%; margin-top:20px;" onclick="submitQuiz()">Kumpulkan & Simpan Nilai</button>
+        <div id="statusKuis" class="loading-spinner">Menyimpan nilai ke Google Sheets Bapak Guru... ⏳</div>
 
         <div id="quiz-result">
             <h3>Hasil Kuis Kamu</h3>
-            <div class="score-circle" id="score-display">100</div>
+            <div class="score-circle" id="score-display">0</div>
             <p id="score-message"></p>
             <h4>Data Evaluasi Jawaban:</h4>
             <div id="review-container"></div>
-            <button class="upload-btn" onclick="resetQuiz()" style="margin-top: 20px;">Kerjakan Ulang</button>
+            <button class="action-btn" onclick="resetQuiz()" style="margin-top: 20px;">Kerjakan Ulang</button>
         </div>
     </div>
 
-    <!-- SECTION 3: SENI RUPA -->
+    <!-- MENU 3: SENI RUPA -->
     <div id="seniRupa" class="container">
         <h2>🎨 Pengumpulan Tugas Seni Rupa</h2>
-        
         <div class="upload-box" style="border-color: #FF6B6B; background-color: #fff5f5;">
-            <h3>Upload Karyamu Di Sini! 🖍️</h3>
-            <p>Foto hasil gambarmu yang paling bagus dan warnai dengan indah, lalu upload ke sini.</p>
-            <label class="upload-btn" style="background-color: var(--primary); color: white; border:none;">
-                Pilih Foto Gambar
-                <input type="file" accept="image/*" onchange="previewImage(event, 'previewSeni')">
-            </label>
-            <div id="previewSeni"></div>
+            <h3>Upload Gambar Karyamu 🖍️</h3>
+            <p>Foto gambar hasil karyamu yang sudah diwarnai dengan indah, lalu unggah ke sini.</p>
+            <input type="file" id="fileSeni" accept="image/*">
+            <br>
+            <button class="action-btn" onclick="uploadFoto('fileSeni', 'Tugas Seni Rupa', 'statusSeni')">Kirim Gambar Seni Rupa</button>
+            <div id="statusSeni" class="loading-spinner">Mengirim gambar ke Google Drive Bapak Guru... ⏳</div>
         </div>
     </div>
 
     <script>
-        // Data Soal Kuis
+        // WEB APP URL MILIK PAK DEDDY
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzVjEyS6zmRLAviszDjkofFJ8voVgkaIdftABJNJJzFpzdCOo6MAXS9NdWxyscMSMunQA/exec";
+
         const questions = [
             { q: "Segala sesuatu yang hidup di lingkungan (seperti hewan dan tumbuhan) disebut komponen...", options: ["A. Abiotik", "B. Biotik", "C. Ekosistem", "D. Populasi"], answer: 1 },
             { q: "Berikut ini yang merupakan contoh komponen abiotik (benda tak hidup) adalah...", options: ["A. Tumbuhan", "B. Cacing", "C. Cahaya Matahari", "D. Jamur"], answer: 2 },
@@ -287,37 +279,65 @@
             { q: "Di taman sekolah terdapat sekelompok kupu-kupu, sekelompok semut, dan berbagai tanaman bunga. Kumpulan ketiganya membentuk...", options: ["A. Individu", "B. Populasi tunggal", "C. Komunitas", "D. Komponen Abiotik"], answer: 2 }
         ];
 
-        // Navigasi antar menu
-        function showSection(sectionId) {
-            document.querySelectorAll('.container').forEach(div => {
-                div.classList.remove('active-section');
-            });
-            document.getElementById(sectionId).classList.add('active-section');
+        function showSection(id) {
+            document.querySelectorAll('.container').forEach(d => d.classList.remove('active-section'));
+            document.getElementById(id).classList.add('active-section');
         }
 
-        // Preview Foto Upload
-        function previewImage(event, previewId) {
-            const container = document.getElementById(previewId);
-            container.innerHTML = ''; 
-            const file = event.target.files[0];
-            if (file) {
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.className = 'preview-img';
-                container.appendChild(img);
-                
-                const notif = document.createElement('p');
-                notif.innerText = "✅ Foto berhasil dipilih!";
-                notif.style.color = "green";
-                notif.style.fontWeight = "bold";
-                container.appendChild(notif);
+        function getNamaSiswa() {
+            const nama = document.getElementById('studentName').value.trim();
+            if (!nama) {
+                alert("Mohon isi Nama Lengkapmu terlebih dahulu di bagian atas!");
+                return null;
             }
+            return nama;
         }
 
-        // Render Kuis
-        const quizContainer = document.getElementById('quiz-container');
+        function uploadFoto(inputId, kategori, statusId) {
+            const nama = getNamaSiswa();
+            if (!nama) return;
+
+            const fileInput = document.getElementById(inputId);
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Pilih file foto terlebih dahulu!");
+                return;
+            }
+
+            const statusEl = document.getElementById(statusId);
+            statusEl.style.display = 'block';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const payload = {
+                    namaSiswa: nama,
+                    kategori: kategori,
+                    detailNilai: "Upload File Foto",
+                    fileName: `${nama}_${kategori}_${file.name}`,
+                    fileData: e.target.result
+                };
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    statusEl.style.display = 'none';
+                    alert("✅ Berhasil dikirim dan tersimpan di Google Drive Bapak Guru!");
+                    fileInput.value = '';
+                })
+                .catch(err => {
+                    statusEl.style.display = 'none';
+                    alert("❌ Gagal mengirim. Pastikan terhubung internet!");
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
         function renderQuiz() {
-            quizContainer.innerHTML = '';
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
             questions.forEach((q, index) => {
                 const card = document.createElement('div');
                 card.className = 'question-card';
@@ -325,25 +345,23 @@
                     <p><strong>Soal ${index + 1}:</strong> ${q.q}</p>
                     <div class="options">
                         ${q.options.map((opt, i) => `
-                            <label>
-                                <input type="radio" name="q${index}" value="${i}">
-                                ${opt}
-                            </label>
+                            <label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>
                         `).join('')}
                     </div>
                 `;
-                quizContainer.appendChild(card);
+                container.appendChild(card);
             });
         }
         renderQuiz();
 
-        // Hitung Kuis
         function submitQuiz() {
+            const nama = getNamaSiswa();
+            if (!nama) return;
+
             let correctCount = 0;
+            let allAnswered = true;
             const reviewContainer = document.getElementById('review-container');
             reviewContainer.innerHTML = '';
-            
-            let allAnswered = true;
 
             questions.forEach((q, index) => {
                 const selected = document.querySelector(`input[name="q${index}"]:checked`);
@@ -352,8 +370,8 @@
                 }
             });
 
-            if(!allAnswered) {
-                alert("Ada soal yang belum dijawab! Silakan periksa kembali ya.");
+            if (!allAnswered) {
+                alert("Harap jawab semua 20 soal terlebih dahulu!");
                 return;
             }
 
@@ -364,7 +382,6 @@
                 
                 if (isCorrect) correctCount++;
 
-                // Buat review
                 const reviewDiv = document.createElement('div');
                 reviewDiv.className = `review-item ${isCorrect ? 'review-benar' : 'review-salah'}`;
                 reviewDiv.innerHTML = `
@@ -376,7 +393,7 @@
 
             const score = (correctCount / questions.length) * 100;
             document.getElementById('score-display').innerText = score;
-            
+
             let message = "";
             if (score === 100) message = "Luar biasa! Kamu memahami ekosistem dengan sangat sempurna! 🏆";
             else if (score >= 80) message = "Hebat! Pemahamanmu sangat bagus! ⭐";
@@ -385,22 +402,39 @@
             
             document.getElementById('score-message').innerText = message;
 
-            // Tampilkan hasil, sembunyikan soal
-            quizContainer.style.display = 'none';
-            document.querySelector('.submit-btn').style.display = 'none';
-            document.getElementById('quiz-result').style.display = 'block';
+            const statusKuis = document.getElementById('statusKuis');
+            statusKuis.style.display = 'block';
+
+            const payload = {
+                namaSiswa: nama,
+                kategori: "Kuis IPAS Ekosistem",
+                detailNilai: `Nilai: ${score} (Benar: ${correctCount}/20)`,
+                fileName: "",
+                fileData: ""
+            };
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                statusKuis.style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'none';
+                document.querySelector('#kuisIpas .action-btn').style.display = 'none';
+                document.getElementById('quiz-result').style.display = 'block';
+            })
+            .catch(err => {
+                statusKuis.style.display = 'none';
+                alert("Nilai gagal terkirim ke server, tetapi nilaimu adalah: " + score);
+            });
         }
 
-        // Reset Kuis
         function resetQuiz() {
             document.getElementById('quiz-result').style.display = 'none';
-            quizContainer.style.display = 'block';
-            document.querySelector('.submit-btn').style.display = 'block';
-            
-            // Bersihkan pilihan radio button
-            const radios = document.querySelectorAll('input[type="radio"]');
-            radios.forEach(radio => radio.checked = false);
-            
+            document.getElementById('quiz-container').style.display = 'block';
+            document.querySelector('#kuisIpas .action-btn').style.display = 'block';
+            renderQuiz();
             window.scrollTo(0, 0);
         }
     </script>
